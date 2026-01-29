@@ -1,0 +1,17 @@
+fcntl.h
+stdlib.h
+unistd.h
+
+file keyboard -> /dev/input/by-path/platform-i8042-serio-0-event-kbd
+
+file da controllare -> input.h ( su pc daniel /u/i/l/input.h )
+
+altro file -> /u/i/l/input-event-codes.h
+
+/usr/include/linux -> trovi tutti i file header che ti servono.
+
+ie.type != EV_KEY -> continua
+
+
+
+ie.value != 1 -> continua
