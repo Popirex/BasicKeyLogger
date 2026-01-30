@@ -11,12 +11,12 @@ int main( int argc, char *argv[]){
     struct input_event ie;
 
     // avrò due argomenti, l'eseguibile e il path della tastiera
-    if(argc != 2 ){
-        printf("\nAttenzione! Uso: %s <path_file_tastiera>\n", argv[0]);
+    if(argc != 3 ){
+        printf("\nAttenzione! Uso: %s <path_file_tastiera> <path-salvataggio-testo>\n", argv[0]);
         exit(1);
     }
 
-    if(argv[1][0] != '/'){
+    if(argv[1][0] != '/' || argv[2][0] != '/'){
      
         printf("\nERRORE: il path del file deve essere assoluto!\n");
         exit(2);
@@ -30,7 +30,7 @@ int main( int argc, char *argv[]){
     }
 
 
-    fd_scrittura = open("log.txt", O_RDWR | O_CREAT | O_TRUNC, 0644);
+    fd_scrittura = open(argv[2], O_RDWR | O_CREAT | O_TRUNC, 0644);
     if(fd_scrittura < 0){
         printf("\nERRORE: apertura file di scrittura\n");
         exit(4);
